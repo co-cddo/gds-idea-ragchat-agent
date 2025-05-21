@@ -21,6 +21,7 @@ class DynamoDBHandler:
         self.index_name = config.INDEX_NAME
         self.embedding_model = config.EMBEDDING_MODEL
         self.llm_model = config.LLM_MODEL
+        self.chat_history_length = config.CHAT_HISTORY_LENGTH
         logger.debug(f"Session History Table: {self.session_history_table}")
         logger.debug(f"Rating History Table: {self.rating_history_table}")
 
@@ -54,7 +55,9 @@ class DynamoDBHandler:
 
         try:
             history = DynamoDBChatMessageHistory(
-                table_name=self.session_history_table, session_id=self.tokenID
+                table_name=self.session_history_table,
+                session_id=self.tokenID,
+                history_size=self.chat_history_length,
             )
             logger.info(f"Successfully retrieved chat history for tokenID: {tokenID}")
             return history

@@ -27,6 +27,7 @@ class Config:
     """id of the guardrails to run queries through"""
     GUARDRAIL_VERSION: str = os.getenv("GUARDRAILS_VERSION")
     """version number of the guardrails"""
+    CHAT_HISTORY_LENGTH: int = os.getenv("CHAT_HISTORY_LENGTH") or 5
 
     def __post_init__(self):
         # Check is any of the values are None.
