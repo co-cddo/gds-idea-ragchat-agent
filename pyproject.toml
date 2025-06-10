@@ -22,7 +22,7 @@ build-backend = "hatchling.build"
 "src" = ""
 
 [tool.hatch.build.targets.wheel]
-packages = ["rag_chat_agent"]
+packages = ["src/rag_chat_agent"]
 
 
 [tool.hatch.build.targets.wheel.force-include]
