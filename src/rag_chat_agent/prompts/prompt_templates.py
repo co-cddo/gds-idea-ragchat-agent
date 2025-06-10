@@ -1,4 +1,5 @@
 import logging
+from importlib.resources import files
 
 from langchain.prompts import (
     ChatPromptTemplate,
@@ -10,7 +11,7 @@ from langchain.prompts import (
 logger = logging.getLogger(__name__)
 
 
-def get_agent_prompt(custom_prompt_path=None):
+def get_agent_prompt(custom_prompt_path: str | None = None):
     logger.info("Configuring agent prompt template")
     system_template = """Respond to the human as helpfully and accurately as possible. You have access to the following tools:
 
@@ -65,7 +66,12 @@ def get_agent_prompt(custom_prompt_path=None):
             )
             raise
     else:
-        logger.info("Using base prompt for tool usage")
+        logger.info("Using default prompt")
+        default_prompt_path = files("rag_chat_agent.prompts").joinpath(
+            "system_prompt.txt"
+        )
+        default_prompt = default_prompt_path.read_text()
+        system_template += f"\n\n{default_prompt}"
 
     system_message_prompt = SystemMessagePromptTemplate.from_template(system_template)
     logger.debug("System message prompt created")
