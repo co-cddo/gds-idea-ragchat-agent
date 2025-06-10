@@ -29,7 +29,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["rag_chat_agent"]
+packages = ["src/rag_chat_agent"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
