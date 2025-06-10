@@ -94,9 +94,7 @@ class RAGChatAgent:
 
         # 6) Agent Prompt
         init_start = time.time()
-        self.prompt = get_agent_prompt(
-            custom_prompt_path="src/rag_chat_agent/prompts/system_prompt.txt"
-        )
+        self.prompt = get_agent_prompt(custom_prompt_path="./prompts/system_prompt.txt")
         logger.info(f"[TIMING] get_agent_prompt took {time.time() - init_start:.2f}s")
 
         # 7) Agent Executor
