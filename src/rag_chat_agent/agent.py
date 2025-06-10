@@ -45,12 +45,13 @@ def normalise_response(response):
 
 
 class RAGChatAgent:
-    def __init__(self, tokenID: str):
+    def __init__(self, tokenID: str, custom_prompt_path: str | None = None):
         start_time = time.time()
         logger.info("AskOps Start")
         self.config = Config()
 
         self.tokenID = tokenID
+        self.custom_prompt_path = custom_prompt_path
 
         # 1) DynamoDB
         init_start = time.time()
@@ -94,7 +95,7 @@ class RAGChatAgent:
 
         # 6) Agent Prompt
         init_start = time.time()
-        self.prompt = get_agent_prompt(custom_prompt_path="./prompts/system_prompt.txt")
+        self.prompt = get_agent_prompt(custom_prompt_path=self.custom_prompt_path)
         logger.info(f"[TIMING] get_agent_prompt took {time.time() - init_start:.2f}s")
 
         # 7) Agent Executor
