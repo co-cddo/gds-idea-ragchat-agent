@@ -16,7 +16,7 @@ class BedrockHandler:
     def get_llm(self):
         logger.info("Creating ChatBedrock LLM instance")
         try:
-            llm = ChatBedrock(model_id=self.model_id, region_name=self.region)
+            llm = ChatBedrock(model_id=self.model_id, region_name=self.region, model_kwargs={"max_tokens":20_000})
             logger.info("Successfully created ChatBedrock LLM instance")
             return llm
         except Exception as e:
