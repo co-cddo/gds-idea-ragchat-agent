@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 class BedrockHandler:
-    def __init__(self, config, model_kwargs: None | dict):
+    def __init__(self, config, model_kwargs: None | dict = None):
         logger.info("Initializing BedrockHandler")
         self.region = config.LLM_REGION
         self.model_id = config.LLM_MODEL

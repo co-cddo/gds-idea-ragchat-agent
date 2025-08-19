@@ -45,11 +45,11 @@ def normalise_response(response):
 
 
 class RAGChatAgent:
-    def __init__(self, tokenID: str):
+    def __init__(self, tokenID: str, model_kwargs: None | dict = None):
         start_time = time.time()
         logger.info("AskOps Start")
         self.config = Config()
-
+        self.model_kwargs = model_kwargs
         self.tokenID = tokenID
 
         # 1) DynamoDB
@@ -61,7 +61,7 @@ class RAGChatAgent:
 
         # 2) Bedrock
         init_start = time.time()
-        self.bedrock = BedrockHandler(self.config)
+        self.bedrock = BedrockHandler(self.config, self.model_kwargs)
         logger.info(
             f"[TIMING] BedrockHandler init took {time.time() - init_start:.2f}s"
         )
